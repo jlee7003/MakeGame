@@ -18,12 +18,11 @@ static class Player
  
      public void attack(Enemy enemy)//적을 공격
     {
-        if(this.hp > 0) //hp가 0이하라면 공격을 못하므로
-        {
+        
            System.out.println("Player Attack!");
             enemy.hp -= this.atk;
            System.out.println("Enemy hp:" + enemy.hp);       
-        }
+      
         
        if(enemy.hp <= 0) //적이 죽었다면
        {
@@ -63,12 +62,11 @@ static class Enemy
     
 public void attack(Player player)
 {
-    if(this.hp > 0)
-    {
+
     System.out.println("Enemy Attack!");
      player.hp -= this.atk;
     System.out.println("Player hp:" + player.hp);   
-    }
+    
          if(player.hp <= 0)
        {
            System.out.println("Player Died!");
@@ -97,7 +95,9 @@ public boolean isLive(){
          
          while(player.isLive() && enemy.isLive())
          {
+             if(!player.isLive()) break; //break를 사용해서 플레이어가 죽었을 경우 공격을 못하게 막음
              player.attack(enemy);
+             if( !enemy.isLive()) break;
              enemy.attack(player);
          }
          
