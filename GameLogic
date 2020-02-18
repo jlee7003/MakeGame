@@ -4,7 +4,7 @@ public class HelloWorld{
 
 static class Player
 {
-    String name;
+    String name; //기본 자료형들 즉 능력치 설정
     int hp;
     int atk;
     
@@ -16,11 +16,19 @@ static class Player
         this.atk = atk;
     }
  
-     public void attack(Enemy enemy)
+     public void attack(Enemy enemy)//적을 공격
     {
-       System.out.println("Player Attack!");
-        enemy.hp -= this.atk; //적의 hp는 this(player의 공격력) - 적의 hp
-       System.out.println("Enemy hp:" + enemy.hp);        
+        if(this.hp > 0) //hp가 0이하라면 공격을 못하므로
+        {
+           System.out.println("Player Attack!");
+            enemy.hp -= this.atk;
+           System.out.println("Enemy hp:" + enemy.hp);       
+        }
+        
+       if(enemy.hp <= 0) //적이 죽었다면
+       {
+           System.out.println("Enemy Died!");
+       }
         //enemy란 객체의 hp를 참조하겠다.
         
         //this는 이 객체의 값을 의미 즉 해당 this가 해당하는 클래스
@@ -55,9 +63,16 @@ static class Enemy
     
 public void attack(Player player)
 {
+    if(this.hp > 0)
+    {
     System.out.println("Enemy Attack!");
      player.hp -= this.atk;
     System.out.println("Player hp:" + player.hp);   
+    }
+         if(player.hp <= 0)
+       {
+           System.out.println("Player Died!");
+       }
 }
 
 public boolean isLive(){
